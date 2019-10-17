@@ -2,10 +2,10 @@ class Queue():
     def __init__(self):
         self.queue = []
     def enqueue(self, value):
-        self.queue.append(value)
+        self.queue.insert(0, value)
     def dequeue(self):
         if self.size() > 0:
-            return self.queue.remove(0)
+            return self.queue.pop()
         else:
             return None
     def size(self):

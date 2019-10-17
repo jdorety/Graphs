@@ -3,21 +3,26 @@ Simple graph implementation
 """
 from util import Stack, Queue  # These may come in handy
 
+
 class Graph:
     """Represent a graph as a dictionary of vertices mapping labels to edges."""
+
     def __init__(self):
         self.vertices = {}
+
     def add_vertex(self, vertex):
         """
         Add a vertex to the graph.
         """
         self.vertices[vertex] = set()
+
     def add_edge(self, v1, v2):
         """
         Add a directed edge to the graph.
         """
         set_of_friends = self.vertices[v1]
         set_of_friends.add(v2)
+
     def bft(self, starting_vertex):
         """
         Class Notes:
@@ -41,13 +46,14 @@ class Graph:
 
         q.enqueue(starting_vertex)
 
-        while len(q):
+        while q.size() > 0:
             current_node = q.dequeue()
+            print(current_node)
 
             if current_node not in visited:
                 visited.add(current_node)
 
-                neighbors = getNeighbors()
+                neighbors = self.vertices[current_node]
 
                 for neighbor in neighbors:
                     q.enqueue(neighbor)
@@ -62,17 +68,19 @@ class Graph:
         # make a set for visited nodes
         visited = set()
         # put the start node on the stack
-        stack.push(start_node)
+        stack.append(starting_vertex)
         # while this stack isn't empty:
         while len(stack):
             # pop off whatever is on top of the stack, this is our current node
             current_node = stack.pop()
+            print(current_node)
             # if current node has not yet been visited:
             if current_node not in visited:
                 visited.add(current_node)
-                neighbors = getNeighbors()
+                neighbors = self.vertices[current_node]
                 for neighbor in neighbors:
-                    stack.append(neighbor)
+                    if neighbor not in visited:
+                        stack.append(neighbor)
 
             # mark the current node as visited by putting it in our visited set
             # get all of the current node's friends / neighbors
@@ -86,6 +94,7 @@ class Graph:
         This should be done using recursion.
         """
         pass  # TODO
+
     def bfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing the shortest path from
@@ -93,6 +102,7 @@ class Graph:
         breath-first order.
         """
         pass  # TODO
+
     def dfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing a path from
@@ -100,9 +110,6 @@ class Graph:
         depth-first order.
         """
         pass  # TODO
-
-
-
 
 
 if __name__ == '__main__':
