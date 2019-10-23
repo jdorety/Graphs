@@ -111,14 +111,14 @@ class Graph:
         starting_vertex to destination_vertex in
         breath-first order.
         """
-        q = Queue()
-        visited = set()
+        q = Queue()  # make the queue
+        visited = set()  # make the visited set
 
-        path = [starting_vertex]
-        q.enqueue(path)
+        path = [starting_vertex]  # add starting vertex to path
+        q.enqueue(path)  # add path to queue
 
-        while q.size() > 0:
-            current_path = q.dequeue()
+        while q.size() > 0:  # while there are still nodes in the queue
+            current_path = q.dequeue()  # take
 
             current_node = current_path[-1]
             if current_node == destination_vertex:
@@ -143,7 +143,31 @@ class Graph:
         starting_vertex to destination_vertex in
         depth-first order.
         """
-        pass  # TODO
+        # First Attempt
+        stack = []
+        visited = set()
+
+        path = [starting_vertex]  # path to dest
+        stack.append(path)  # add stack to path
+
+        while len(stack) > 0:  # while there is a stack
+            current_path = stack.pop()  # take path off of stack
+            current_node = current_path[-1]  # get node at end of path
+
+
+            if current_node not in visited:  # checks if visited
+                visited.add(current_node)  # add to visited set
+                if current_node == destination_vertex:
+                    return current_path  # returns path if current node is the destination node
+                # get neighbors from current node
+                neighbors = self.get_neighbors(current_node)
+
+                for neighbor in neighbors:
+                    path_copy = current_path[:]
+                    path_copy.append(neighbor)
+
+                    stack.append(path_copy)
+
 
 
 if __name__ == '__main__':
